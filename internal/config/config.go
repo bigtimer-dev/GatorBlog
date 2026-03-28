@@ -15,7 +15,7 @@ type Config struct {
 func Read() (Config, error) {
 	HomeDir, err := os.UserHomeDir()
 	if err != nil {
-		return Config{}, fmt.Errorf("Error no HomeDir: %w", err)
+		return Config{}, fmt.Errorf("error no Homedir: %w", err)
 	}
 
 	path := filepath.Join(HomeDir, ".gatorconfig.json")
@@ -33,4 +33,31 @@ func Read() (Config, error) {
 	}
 
 	return cfg, nil
+}
+
+func write(cfg Config) error {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return err
+	}
+	path := filepath.Join(homeDir, ".gatorconfig.json")
+
+	file, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	err = encoder.Encode(cfg)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (cfg *Config) SetUser(userName string) error {
+	cfg.CurrentUserName = userName
+	return write(*cfg)
 }
