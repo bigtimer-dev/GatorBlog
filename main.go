@@ -1,10 +1,24 @@
 package main
 
 import (
-	github.com/gatorblog/internal/config
+	"fmt"
+	"log"
+
+	"github.com/bigtimer-dev/GatorBlog/internal/config"
 )
+
 func main() {
-	config.Read()
-	cfg.SetUser("Alvin")
-	
+	cfg, err := config.Read()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = cfg.SetUser("Alvin")
+	if err != nil {
+		log.Fatal(err)
+	}
+	cfg, err = config.Read()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n", cfg)
 }
