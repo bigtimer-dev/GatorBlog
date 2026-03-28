@@ -1,3 +1,3 @@
-module github.com/bigtimer-dev/GatorBlog.git
+module github.com/bigtimer-dev/GatorBlog
 
 go 1.26.1
