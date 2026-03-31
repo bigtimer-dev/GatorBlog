@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/bigtimer-dev/GatorBlog/internal/config"
+	_ "github.com/lib/pq"
 )
 
 type state struct {
