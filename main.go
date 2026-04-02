@@ -43,6 +43,7 @@ func main() {
 	// register our commands
 	newCommands.register("login", handlerLogin)
 	newCommands.register("register", handlerRegister)
+	newCommands.register("reset", handlerReset)
 
 	// verify if the cli line contain command name and arguments
 	if len(os.Args) < 2 {

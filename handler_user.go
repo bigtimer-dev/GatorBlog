@@ -19,7 +19,7 @@ func handlerLogin(s *state, cmd command) error {
 
 	user, err := s.db.GetUser(context.Background(), cmd.Args[0])
 	if err != nil {
-		fmt.Printf("User dont exist rigister a name first: %v \n", err)
+		fmt.Printf("User dont exist register a name first: %v \n", err)
 		os.Exit(1)
 	}
 
@@ -57,6 +57,20 @@ func handlerRegister(s *state, cmd command) error {
 	}
 
 	fmt.Printf("User Created: %v\n", user)
+
+	return nil
+}
+
+// Delete all info from the table
+func handlerReset(s *state, cmd command) error {
+	err := s.db.ResetTable(context.Background())
+	if err != nil {
+		fmt.Print("error deleting the database")
+		os.Exit(1)
+	}
+
+	fmt.Print("deleting the database was succesfully\n")
+	os.Exit(0)
 
 	return nil
 }
