@@ -40,8 +40,9 @@ func main() {
 	newCommands := &commands{
 		registeredCommands: make(map[string]func(*state, command) error),
 	}
-	// register our first commands the login one
+	// register our commands
 	newCommands.register("login", handlerLogin)
+	newCommands.register("register", handlerRegister)
 
 	// verify if the cli line contain command name and arguments
 	if len(os.Args) < 2 {
