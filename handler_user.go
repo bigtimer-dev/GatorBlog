@@ -74,3 +74,24 @@ func handlerReset(s *state, cmd command) error {
 
 	return nil
 }
+
+// print a list of users in the database
+func handlerList(s *state, cmd command) error {
+	users, err := s.db.GetUsers(context.Background())
+	if err != nil {
+		fmt.Printf("error getting users\n")
+		os.Exit(1)
+	}
+
+	for _, user := range users {
+		if user == s.cfg.CurrentUserName {
+			fmt.Printf("%v (current)\n", user)
+			continue
+		}
+		fmt.Printf("%v\n", user)
+
+	}
+	os.Exit(0)
+
+	return nil
+}
